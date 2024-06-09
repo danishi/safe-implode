@@ -1,0 +1,28 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  Test:
+    name: PHP ${{ matrix.php }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        php: [8.2.4]
+
+    steps:
+      - name: Checkout 🔔
+        uses: actions/checkout@v4
+
+      - name: Setup PHP env 🔧
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Install Composer dependencies 📦
+        run: php composer install
+
+      - name: Unit test 🧪
+        run: php composer test
