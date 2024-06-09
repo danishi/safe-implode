@@ -23,7 +23,7 @@ jobs:
           tools: composer:v2
 
       - name: Install Composer dependencies 📦
-        run: php composer install
+        run: composer install
 
       - name: Unit test 🧪
-        run: php composer test
+        run: composer test
